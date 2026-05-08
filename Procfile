@@ -1,1 +1,1 @@
-web: gunicorn bloomcraft.wsgi
+web: gunicorn bloomcraft.wsgi:application
