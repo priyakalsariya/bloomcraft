@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="editorial-wrapper">
+    <div class="builder-intro">
+        <h2>Curate Your Bouquet</h2>
+        <p>Pick the elements to craft your signature floral arrangement.</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="category-block">
+            <div class="category-header">
+                <span class="step-num">01</span>
+                <h3>The Main Blooms</h3>
+            </div>
+            <div class="editorial-grid">
+                {% for flower in flowers %}
+                <label class="editorial-item">
+                    <input type="checkbox" name="flowers" value="{{ flower.id }}" class="item-input">
+                    <div class="item-visual">
+                        <div class="img-frame">
+                            <img src="{{ flower.image.url }}" alt="{{ flower.name }}">
+                        </div>
+                        <div class="selection-overlay">✓ Selected</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>{{ flower.name }}</h4>
+                        <span class="item-price">₹{{ flower.price }}</span>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="category-block">
+            <div class="category-header">
+                <span class="step-num">02</span>
+                <h3>Foliage & Greenery</h3>
+            </div>
+            <div class="editorial-grid">
+                {% for leaf in leaves %}
+                <label class="editorial-item">
+                    <input type="checkbox" name="leaves" value="{{ leaf.id }}" class="item-input">
+                    <div class="item-visual">
+                        <div class="img-frame">
+                            <img src="{{ leaf.image.url }}" alt="{{ leaf.name }}">
+                        </div>
+                        <div class="selection-overlay">✓ Selected</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>{{ leaf.name }}</h4>
+                        <span class="item-price">₹{{ leaf.price }}</span>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="category-block">
+            <div class="category-header">
+                <span class="step-num">03</span>
+                <h3>Wrapping Style</h3>
+            </div>
+            <div class="editorial-grid">
+                {% for paper in papers %}
+                <label class="editorial-item">
+                    <input type="radio" name="paper" value="{{ paper.id }}" class="item-input">
+                    <div class="item-visual">
+                        <div class="img-frame">
+                            <img src="{{ paper.image.url }}" alt="{{ paper.name }}">
+                        </div>
+                        <div class="selection-overlay">✓ Chosen</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>{{ paper.name }}</h4>
+                        <span class="item-price">₹{{ paper.price }}</span>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="category-block">
+            <div class="category-header">
+                <span class="step-num">04</span>
+                <h3>Accessories</h3>
+            </div>
+            <div class="editorial-grid">
+                {% for accessories in accessories %}
+                <label class="editorial-item">
+                    <input type="checkbox" name="accessories" value="{{ accessories.id }}" class="item-input">
+                    <div class="item-visual">
+                        <div class="img-frame">
+                            <img src="{{ accessories.image.url }}" alt="{{ accessories.name }}">
+                        </div>
+                        <div class="selection-overlay">✓ Selected</div>
+                    </div>
+                    <div class="item-info">
+                        <h4>{{ accessories.name }}</h4>
+                        <span class="item-price">₹{{ accessories.price }}</span>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="submit-tray">
+            <button type="submit" class="btn-bloom editorial-btn">Create Arrangement 🌸</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

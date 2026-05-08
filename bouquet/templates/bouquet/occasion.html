@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="occasion-wrapper">
+    <div class="occasion-header">
+        <h2>Select an Occasion 🌸</h2>
+        <p>Choose the occasion to design your bouquet</p>
+    </div>
+
+    <div class="occasion-grid">
+        <div class="occasion-card">
+            <div class="card-icon">🎂</div>
+            <h3>Birthday</h3>
+            <p>Bright and colorful flowers</p>
+            <a href="{% url 'select_occasion' 'birthday' %}" class="btn-select">Select</a>
+        </div>
+
+        <div class="occasion-card">
+            <div class="card-icon">❤️</div>
+            <h3>Anniversary</h3>
+            <p>Romantic red blooms</p>
+            <a href="{% url 'select_occasion' 'anniversary' %}" class="btn-select">Select</a>
+        </div>
+
+        <div class="occasion-card">
+            <div class="card-icon">💍</div>
+            <h3>Wedding</h3>
+            <p>Elegant white flowers</p>
+            <a href="{% url 'select_occasion' 'wedding' %}" class="btn-select">Select</a>
+        </div>
+
+        <div class="occasion-card">
+            <div class="card-icon">🌼</div>
+            <h3>Other</h3>
+            <p>Customize freely</p>
+            <a href="{% url 'select_occasion' 'other' %}" class="btn-select">Select</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

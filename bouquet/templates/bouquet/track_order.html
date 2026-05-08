@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="track-wrapper">
+    <div class="track-header">
+        <h2>Track Your Bouquet 🚚</h2>
+        <p>Order #{{ order.id }} • Estimated Delivery: Soon</p>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-line"></div>
+        
+        {% for step in step_data %}
+        <div class="track-step {% if step.completed %}completed{% endif %} {% if step.current %}current{% endif %}">
+            <div class="step-icon">
+                {% if step.completed or step.current %}
+                    <span class="icon-check">✔</span>
+                {% else %}
+                    <span class="icon-wait">⏳</span>
+                {% endif %}
+            </div>
+            <div class="step-info">
+                <span class="step-name">{{ step.name }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="track-footer">
+        <a href="{% url 'my_orders' %}" class="btn-outline">View All Orders</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomCraft</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header class="main-header">
+    <div class="header-container">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            🌸 <strong>BloomCraft</strong>
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="/" class="nav-link">Home</a>
+            <a href="{% url 'occasion' %}" class="nav-link">Occasions</a>
+            <a href="{% url "gallery" %}" class="nav-link">Gallery</a>
+            <a href="{% url "cart" %}" class="nav-link">Cart</a>
+            <a href="{% url 'my_orders' %}" class="nav-link">My Orders </a>
+        </nav>
+
+        <!-- User Actions -->
+        <div class="header-actions">
+            {% if user.is_authenticated %}
+                <a href="#">👤 {{ user.username }}</a>
+                <a href="{% url 'logout' %}"class="btn-bloom">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}"class="btn-bloom">Login</a>
+                <a href="{% url 'register' %}" class="btn-bloom">Join</a>
+            {% endif %}
+        </div>
+
+    </div>
+</header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+<footer class="site-footer">
+    <div class="footer-container">
+
+        <p>🌸 BloomCraft — Custom Bouquets Made with Love</p>
+
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <p>&copy; 2026 BloomCraft</p>
+
+    </div>
+</footer>
+
+</body>
+</html>

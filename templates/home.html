@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-container">
+        <div class="hero-text-box">
+            <h1><span class="brand-name"> Welcome to BloomCraft</span></h1>
+            <h3>Where Flowers Meet Creativity</h3>
+            <p>
+                Customize flowers, leaves, and accessories to design 
+                a bouquet that speaks from the heart.
+            </p>
+            <a href="{% url 'occasion' %}" class="cta-button">Start Designing →</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

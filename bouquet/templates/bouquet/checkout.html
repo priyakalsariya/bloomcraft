@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="checkout-wrapper">
+    <div class="checkout-header">
+        <h2>Checkout 🧾</h2>
+        <p>Finalize your order details to send your blooms home.</p>
+    </div>
+
+    <div class="checkout-container">
+        <div class="checkout-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-list">
+                {% for item in items %}
+                <div class="summary-item">
+                    <span class="summary-prompt">"{{ item.bouquet.prompt }}"</span>
+                    <span class="summary-calc">{{ item.quantity }} × ₹{{ item.bouquet.price }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="summary-total-line">
+                <span>Total Amount</span>
+                <span class="final-price">₹{{ total }}</span>
+            </div>
+        </div>
+
+        <div class="checkout-form-box">
+           <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Shipping Address</label>
+                <input type="text" name="address" placeholder="e.g. 123 Flower Lane, NY" required>
+            </div>
+
+            <div class="input-group">
+                <label>Contact Number</label>
+                <input type="text" name="phone" placeholder="e.g. +91 9876543210" required>
+            </div>
+
+            <!-- ✅ NEW: Payment Method -->
+            <div class="input-group">
+                <label>Select Payment Method</label>
+
+                <div style="margin-top:10px;">
+                    <label>
+                        <input type="radio" name="payment_method" value="COD" required>
+                        Cash on Delivery 💵
+                    </label><br>
+
+                    <label>
+                        <input type="radio" name="payment_method" value="ONLINE">
+                        UPI / Online Payment 📱
+                    </label><br>
+
+                    <label>
+                        <input type="radio" name="payment_method" value="CARD">
+                        Debit / Credit Card 💳
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-bloom place-order-btn">
+                Place Order 🚀
+            </button>
+        </form>
+            <p class="secure-note">🔒 Your payment and data are encrypted and secure.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

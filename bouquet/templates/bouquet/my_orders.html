@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="orders-wrapper">
+    <div class="orders-header">
+        <h2>My Orders 📦</h2>
+        <p>Track your previous floral arrangements and delivery status.</p>
+    </div>
+
+    <div class="orders-list">
+        {% for order in orders %}
+        <div class="order-card">
+            <div class="order-main-info">
+                <div class="order-id-group">
+                    <h3>Order #{{ order.id }}</h3>
+                    <span class="status-badge status-{{ order.status|lower }}">{{ order.status }}</span>
+                </div>
+                <div class="order-meta">
+                    <p><strong>Total:</strong> <span class="order-price">₹{{ order.total_price }}</span></p>
+                    <p><strong>Address:</strong> {{ order.address }}</p>
+                    <p><strong>Phone:</strong> {{ order.phone }}</p>
+                </div>
+            </div>
+
+            <div class="order-items-section">
+                <h4>Arrangements in this order:</h4>
+                <div class="order-items-grid">
+                    {% for item in order.orderitem_set.all %}
+                    <div class="order-item-row">
+                        <div class="item-detail">
+                            <span class="item-qty">× {{ item.quantity }}</span>
+                        </div>
+                        <span class="item-price">₹{{ item.bouquet.price }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+         <div class="order-actions" style="margin-top:15px; display:flex; gap:10px;">
+
+            <a href="{% url 'track_order' order.id %}" class="btn-bloom">
+                Track Order 🚚
+            </a>
+
+            <a href="{% url 'download_invoice' order.id %}" class="btn-download">
+                Download Invoice 🧾
+            </a>
+
+        </div>
+        </div>
+        {% empty %}
+        
+        <div class="empty-orders">
+            <p>You haven't placed any orders yet.</p>
+            <a href="{% url 'occasion' %}" class="btn-bloom">Start Designing</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

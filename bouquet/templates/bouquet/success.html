@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="success-wrapper">
+    <div class="success-card">
+        <div class="success-icon">🌸</div>
+        <h2>Order Placed Successfully!</h2>
+        <p class="success-message">
+            Thank you for choosing <strong>BloomCraft</strong>. Your unique floral arrangement is being prepared with care and will be delivered to your doorstep soon.
+        </p>
+        
+        <div class="success-actions">
+            <a href="{% url 'my_orders' %}" class="btn-outline">Track Your Order 📦</a>
+            <a href="{% url 'gallery' %}" class="btn-bloom">Back to Gallery</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

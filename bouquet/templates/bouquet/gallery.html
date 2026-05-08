@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="gallery-wrapper">
+    <div class="gallery-header">
+        <h2>Your Bouquet Gallery 🌸</h2>
+        <p>A collection of your unique floral masterpieces</p>
+    </div>
+
+    <div class="gallery-grid">
+        {% for b in bouquets %}
+        <div class="gallery-card">
+            <div class="gallery-img-frame">
+                <img src="{{ b.image_url }}" alt="Custom Bouquet">
+                
+            </div>
+            <div><p style="align:center"><strong>₹{{ b.price }}</strong></p></div>
+            <div class="gallery-info">
+                <span class="gallery-label">Arrangement Concept</span>
+
+                <p>{{ b.prompt }}</p>
+                
+                <div class="gallery-actions">
+                  <form method="POST" action="{% url 'add_to_cart' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="bouquet_id" value="{{ b.id }}">
+                    <button type="submit" class="btn-download">Add to Cart</button>
+                </form>
+
+                <a href="{% url 'download_image' b.id %}" class="btn-download">Download</a>
+                <a href="{% url 'delete_bouquet' b.id %}" class="btn-delete" onclick="return confirm('Delete this masterpiece?');">Delete</a>        
+            </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-gallery">
+            <p>Your gallery is empty. Start designing to see your creations here!</p>
+            <a href="{% url 'occasion' %}" class="btn-bloom">Start Designing</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

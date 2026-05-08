@@ -1,0 +1,34 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<h2>Your AI Bouquet</h2>
+
+<div style="text-align:center;max-width:600px; margin:auto;">
+      <img src="{{ image_url }}" style="width:100%; border-radius:20px;">
+
+      <h3>Price: ₹{{ price }}</h3>
+
+    <form method="POST" action="{% url 'add_to_cart' %}">
+    {% csrf_token %}
+    <input type="hidden" name="bouquet_id" value="{{ bouquet_id }}">
+    <button type="submit" class="btn-bloom">Add to Cart 🛒</button>
+</form>
+
+    <h3 style="margin-top:20px;">Description</h3>
+
+     <p>{{ prompt }}</p>
+     
+
+    <a href="{% url 'builder' %}" class="btn-bloom">Create Another</a>
+
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Join BloomCraft</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="django-form-wrapper">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn-login">Register</button>
+    </form>
+
+    <p class="form-footer">
+        Already have an account? <a href="/login/">Login</a>
+    </p>
+</div>
+{% endblock %}

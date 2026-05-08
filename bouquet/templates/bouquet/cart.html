@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="cart-wrapper">
+    <div class="cart-header">
+        <h2>Your Cart 🛒</h2>
+        <p>Review your floral arrangements before checkout.</p>
+    </div>
+
+    <div class="cart-content">
+        <div class="cart-items-list">
+            {% for item in items %}
+            <div class="cart-item-card">
+                <div class="cart-img-frame">
+                    <img src="{{ item.bouquet.image_url }}" alt="Bouquet">
+                </div>
+                
+                <div class="cart-item-details">
+                    <p class="item-prompt">"{{ item.bouquet.prompt }}"</p>
+                    <div class="item-meta">
+                        <span class="item-price">₹{{ item.bouquet.price }}</span>
+                        <span class="item-qty">Qty: {{ item.quantity }}</span>
+                    </div>
+                </div>
+
+                <div class="cart-item-actions">
+                    <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn">Remove ✕</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-cart-msg">
+                <p>Your cart is empty. Let's design something beautiful!</p>
+                <a href="{% url 'occasion' %}" class="nav-link">Start Designing →</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if items %}
+        <div class="cart-summary-sidebar">
+            <div class="summary-card">
+                <h3>Order Summary</h3>
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span>₹{{ total }}</span>
+                </div>
+                <div class="summary-line">
+                    <span>Delivery</span>
+                    <span class="free-text">FREE</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>₹{{ total }}</span>
+                </div>
+                <a href="{% url 'checkout' %}" class="btn-bloom checkout-btn">Proceed to Checkout 💳</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
